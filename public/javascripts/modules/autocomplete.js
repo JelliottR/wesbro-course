@@ -18,5 +18,3 @@ function autocomplete(input, latInput, lngInput) {
 module.exports = {
     autocomplete
 };
-
-//17
