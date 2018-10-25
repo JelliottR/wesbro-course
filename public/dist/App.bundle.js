@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 33);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -73,99 +73,9 @@
 "use strict";
 
 
-function autocomplete(input, latInput, lngInput) {
-    if (!input) return; // skip this fn from running if there is not input on the page
-
-    var dropdown = new google.maps.places.Autocomplete(input);
-
-    dropdown.addListener('place_changed', function () {
-        var place = dropdown.getPlace();
-        latInput.value = place.geometry.location.lat();
-        lngInput.value = place.geometry.location.lng();
-    });
-    //if someone hits enter on address field, don't submit the form
-
-    input.on('keydown', function (e) {
-        if (e === 13) e.preventDefault();
-    });
-}
-
-module.exports = {
-    autocomplete: autocomplete
-};
-
-/***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-// based on https://gist.github.com/paulirish/12fb951a8b893a454b32
-
-var $ = document.querySelector.bind(document);
-var $$ = document.querySelectorAll.bind(document);
-
-Node.prototype.on = window.on = function (name, fn) {
-  this.addEventListener(name, fn);
-};
-
-NodeList.prototype.__proto__ = Array.prototype; // eslint-disable-line
-
-NodeList.prototype.on = NodeList.prototype.addEventListener = function (name, fn) {
-  this.forEach(function (elem) {
-    elem.on(name, fn);
-  });
-};
-
-exports.$ = $;
-exports.$$ = $$;
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-__webpack_require__(2);
-
-var _bling = __webpack_require__(1);
-
-var _require = __webpack_require__(13),
-    typeAhead = _require.typeAhead;
-
-var _require2 = __webpack_require__(0),
-    autocomplete = _require2.autocomplete;
-
-var _require3 = __webpack_require__(33),
-    makeMap = _require3.makeMap;
-
-autocomplete((0, _bling.$)('#address'), (0, _bling.$)('#lat'), (0, _bling.$)('#lng'));
-typeAhead((0, _bling.$)('.search'));
-
-makeMap((0, _bling.$)('#map'));
-
-/***/ }),
-/* 4 */,
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-var bind = __webpack_require__(11);
+var bind = __webpack_require__(8);
 
 /*global toString:true*/
 
@@ -460,13 +370,52 @@ module.exports = {
 };
 
 /***/ }),
-/* 6 */
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+// based on https://gist.github.com/paulirish/12fb951a8b893a454b32
+
+var $ = document.querySelector.bind(document);
+var $$ = document.querySelectorAll.bind(document);
+
+Node.prototype.on = window.on = function (name, fn) {
+  this.addEventListener(name, fn);
+};
+
+NodeList.prototype.__proto__ = Array.prototype; // eslint-disable-line
+
+NodeList.prototype.on = NodeList.prototype.addEventListener = function (name, fn) {
+  this.forEach(function (elem) {
+    elem.on(name, fn);
+  });
+};
+
+exports.$ = $;
+exports.$$ = $$;
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = __webpack_require__(15);
+
+/***/ }),
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
-var utils = __webpack_require__(5);
+var utils = __webpack_require__(0);
 var normalizeHeaderName = __webpack_require__(29);
 
 var PROTECTION_PREFIX = /^\)\]\}',?\n/;
@@ -484,10 +433,10 @@ function getDefaultAdapter() {
   var adapter;
   if (typeof XMLHttpRequest !== 'undefined') {
     // For browsers use XHR adapter
-    adapter = __webpack_require__(7);
+    adapter = __webpack_require__(4);
   } else if (typeof process !== 'undefined') {
     // For node use HTTP adapter
-    adapter = __webpack_require__(7);
+    adapter = __webpack_require__(4);
   }
   return adapter;
 }
@@ -552,21 +501,21 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 });
 
 module.exports = defaults;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(9)))
 
 /***/ }),
-/* 7 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
-var utils = __webpack_require__(5);
+var utils = __webpack_require__(0);
 var settle = __webpack_require__(21);
 var buildURL = __webpack_require__(24);
 var parseHeaders = __webpack_require__(30);
 var isURLSameOrigin = __webpack_require__(28);
-var createError = __webpack_require__(10);
+var createError = __webpack_require__(7);
 var btoa = typeof window !== 'undefined' && window.btoa && window.btoa.bind(window) || __webpack_require__(23);
 
 module.exports = function xhrAdapter(config) {
@@ -731,10 +680,10 @@ module.exports = function xhrAdapter(config) {
     request.send(requestData);
   });
 };
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(9)))
 
 /***/ }),
-/* 8 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -760,7 +709,7 @@ Cancel.prototype.__CANCEL__ = true;
 module.exports = Cancel;
 
 /***/ }),
-/* 9 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -771,7 +720,7 @@ module.exports = function isCancel(value) {
 };
 
 /***/ }),
-/* 10 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -794,7 +743,7 @@ module.exports = function createError(message, config, code, response) {
 };
 
 /***/ }),
-/* 11 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -811,7 +760,7 @@ module.exports = function bind(fn, thisArg) {
 };
 
 /***/ }),
-/* 12 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1004,13 +953,163 @@ process.umask = function () {
 };
 
 /***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+function autocomplete(input, latInput, lngInput) {
+    if (!input) return; // skip this fn from running if there is not input on the page
+
+    var dropdown = new google.maps.places.Autocomplete(input);
+
+    dropdown.addListener('place_changed', function () {
+        var place = dropdown.getPlace();
+        latInput.value = place.geometry.location.lat();
+        lngInput.value = place.geometry.location.lng();
+    });
+    //if someone hits enter on address field, don't submit the form
+
+    input.on('keydown', function (e) {
+        if (e === 13) e.preventDefault();
+    });
+}
+
+module.exports = {
+    autocomplete: autocomplete
+};
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _axios = __webpack_require__(2);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+var _bling = __webpack_require__(1);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function ajaxHeart(e) {
+    var _this = this;
+
+    e.preventDefault();
+    _axios2.default.post(this.action).then(function (res) {
+        var isHearted = _this.heart.classList.toggle('heart__button--hearted');
+        (0, _bling.$)('.heart-count').textContent = res.data.hearts.length;
+
+        if (isHearted) {
+            _this.heart.classList.add('heart__button--float');
+            setTimeout(function () {
+                return _this.heart.classList.remove('heart__button--float');
+            }, 2500);
+        }
+    }).catch(console.error);
+}
+
+exports.default = ajaxHeart;
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+var _axios = __webpack_require__(2);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+var _bling = __webpack_require__(1);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mapOptions = {
+    center: { lat: 43.2, lng: -79.8 },
+    zoom: 10
+};
+
+function loadPlaces(map) {
+    var lat = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 43.2;
+    var lng = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : -79.8;
+
+    _axios2.default.get('/api/stores/near?lat=' + lat + '&lng=' + lng).then(function (res) {
+        var places = res.data;
+        if (!places.length) {
+            alert('No places found!');
+            return;
+        }
+
+        //create bounds
+        var bounds = new google.maps.LatLngBounds();
+        var infoWindow = new google.maps.InfoWindow();
+
+        var markers = places.map(function (place) {
+            var _place$location$coord = _slicedToArray(place.location.coordinates, 2),
+                placeLng = _place$location$coord[0],
+                placeLat = _place$location$coord[1];
+
+            var position = { lat: placeLat, lng: placeLng };
+            bounds.extend(position);
+            var marker = new google.maps.Marker({ map: map, position: position });
+            marker.place = place;
+            return marker;
+        });
+
+        //click on marker, show details of place
+        markers.forEach(function (marker) {
+            return marker.addListener('click', function () {
+                var html = '<div class=popup><a href="/store/' + this.place.slug + '">\n                                <img src="/uploads/' + (this.place.photo || "store.png") + '"</a>\n                                <p>' + this.place.name + ' - ' + this.place.location.address + '</p></div>';
+                infoWindow.setContent(html);
+                infoWindow.open(map, this);
+            });
+        });
+
+        //then zoom to fit markers
+        map.setCenter(bounds.getCenter());
+        map.fitBounds(bounds);
+    });
+}
+
+function makeMap(mapDiv) {
+    if (!mapDiv) {
+        return;
+    }
+
+    //make our map
+    var map = new google.maps.Map(mapDiv, mapOptions);
+    loadPlaces(map);
+
+    var input = (0, _bling.$)('[name="geolocate"]');
+    var autocomplete = new google.maps.places.Autocomplete(input);
+
+    autocomplete.addListener('place_changed', function () {
+        var place = autocomplete.getPlace();
+        loadPlaces(map, place.geometry.location.lat(), place.geometry.location.lng());
+    });
+}
+
+module.exports = { makeMap: makeMap };
+
+/***/ }),
 /* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var axios = __webpack_require__(14);
+var axios = __webpack_require__(2);
 var dompurify = __webpack_require__(32);
 
 function searchResultsHTML(stores) {
@@ -1088,12 +1187,9 @@ module.exports = {
 
 /***/ }),
 /* 14 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-
-
-module.exports = __webpack_require__(15);
+// removed by extract-text-webpack-plugin
 
 /***/ }),
 /* 15 */
@@ -1102,10 +1198,10 @@ module.exports = __webpack_require__(15);
 "use strict";
 
 
-var utils = __webpack_require__(5);
-var bind = __webpack_require__(11);
+var utils = __webpack_require__(0);
+var bind = __webpack_require__(8);
 var Axios = __webpack_require__(17);
-var defaults = __webpack_require__(6);
+var defaults = __webpack_require__(3);
 
 /**
  * Create an instance of Axios
@@ -1138,9 +1234,9 @@ axios.create = function create(instanceConfig) {
 };
 
 // Expose Cancel & CancelToken
-axios.Cancel = __webpack_require__(8);
+axios.Cancel = __webpack_require__(5);
 axios.CancelToken = __webpack_require__(16);
-axios.isCancel = __webpack_require__(9);
+axios.isCancel = __webpack_require__(6);
 
 // Expose all/spread
 axios.all = function all(promises) {
@@ -1160,7 +1256,7 @@ module.exports.default = axios;
 "use strict";
 
 
-var Cancel = __webpack_require__(8);
+var Cancel = __webpack_require__(5);
 
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -1223,8 +1319,8 @@ module.exports = CancelToken;
 "use strict";
 
 
-var defaults = __webpack_require__(6);
-var utils = __webpack_require__(5);
+var defaults = __webpack_require__(3);
+var utils = __webpack_require__(0);
 var InterceptorManager = __webpack_require__(18);
 var dispatchRequest = __webpack_require__(19);
 var isAbsoluteURL = __webpack_require__(27);
@@ -1314,7 +1410,7 @@ module.exports = Axios;
 "use strict";
 
 
-var utils = __webpack_require__(5);
+var utils = __webpack_require__(0);
 
 function InterceptorManager() {
   this.handlers = [];
@@ -1372,10 +1468,10 @@ module.exports = InterceptorManager;
 "use strict";
 
 
-var utils = __webpack_require__(5);
+var utils = __webpack_require__(0);
 var transformData = __webpack_require__(22);
-var isCancel = __webpack_require__(9);
-var defaults = __webpack_require__(6);
+var isCancel = __webpack_require__(6);
+var defaults = __webpack_require__(3);
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -1464,7 +1560,7 @@ module.exports = function enhanceError(error, config, code, response) {
 "use strict";
 
 
-var createError = __webpack_require__(10);
+var createError = __webpack_require__(7);
 
 /**
  * Resolve or reject a Promise based on response status.
@@ -1490,7 +1586,7 @@ module.exports = function settle(resolve, reject, response) {
 "use strict";
 
 
-var utils = __webpack_require__(5);
+var utils = __webpack_require__(0);
 
 /**
  * Transform the data for a request or a response
@@ -1557,7 +1653,7 @@ module.exports = btoa;
 "use strict";
 
 
-var utils = __webpack_require__(5);
+var utils = __webpack_require__(0);
 
 function encode(val) {
   return encodeURIComponent(val).replace(/%40/gi, '@').replace(/%3A/gi, ':').replace(/%24/g, '$').replace(/%2C/gi, ',').replace(/%20/g, '+').replace(/%5B/gi, '[').replace(/%5D/gi, ']');
@@ -1643,7 +1739,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 "use strict";
 
 
-var utils = __webpack_require__(5);
+var utils = __webpack_require__(0);
 
 module.exports = utils.isStandardBrowserEnv() ?
 
@@ -1724,7 +1820,7 @@ module.exports = function isAbsoluteURL(url) {
 "use strict";
 
 
-var utils = __webpack_require__(5);
+var utils = __webpack_require__(0);
 
 module.exports = utils.isStandardBrowserEnv() ?
 
@@ -1793,7 +1889,7 @@ function nonStandardBrowserEnv() {
 "use strict";
 
 
-var utils = __webpack_require__(5);
+var utils = __webpack_require__(0);
 
 module.exports = function normalizeHeaderName(headers, normalizedName) {
   utils.forEach(headers, function processHeader(value, name) {
@@ -1811,7 +1907,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 "use strict";
 
 
-var utils = __webpack_require__(5);
+var utils = __webpack_require__(0);
 
 /**
  * Parse headers into an object
@@ -2703,82 +2799,32 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 "use strict";
 
 
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-
-var _axios = __webpack_require__(14);
-
-var _axios2 = _interopRequireDefault(_axios);
+__webpack_require__(14);
 
 var _bling = __webpack_require__(1);
 
+var _heart = __webpack_require__(11);
+
+var _heart2 = _interopRequireDefault(_heart);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var mapOptions = {
-    center: { lat: 43.2, lng: -79.8 },
-    zoom: 10
-};
+var _require = __webpack_require__(13),
+    typeAhead = _require.typeAhead;
 
-function loadPlaces(map) {
-    var lat = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 43.2;
-    var lng = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : -79.8;
+var _require2 = __webpack_require__(10),
+    autocomplete = _require2.autocomplete;
 
-    _axios2.default.get('/api/stores/near?lat=' + lat + '&lng=' + lng).then(function (res) {
-        var places = res.data;
-        if (!places.length) {
-            alert('No places found!');
-            return;
-        }
+var _require3 = __webpack_require__(12),
+    makeMap = _require3.makeMap;
 
-        //create bounds
-        var bounds = new google.maps.LatLngBounds();
-        var infoWindow = new google.maps.InfoWindow();
+autocomplete((0, _bling.$)('#address'), (0, _bling.$)('#lat'), (0, _bling.$)('#lng'));
+typeAhead((0, _bling.$)('.search'));
 
-        var markers = places.map(function (place) {
-            var _place$location$coord = _slicedToArray(place.location.coordinates, 2),
-                placeLng = _place$location$coord[0],
-                placeLat = _place$location$coord[1];
+makeMap((0, _bling.$)('#map'));
 
-            var position = { lat: placeLat, lng: placeLng };
-            bounds.extend(position);
-            var marker = new google.maps.Marker({ map: map, position: position });
-            marker.place = place;
-            return marker;
-        });
-
-        //click on marker, show details of place
-        markers.forEach(function (marker) {
-            return marker.addListener('click', function () {
-                var html = '<div class=popup><a href="/store/' + this.place.slug + '">\n                                <img src="/uploads/' + (this.place.photo || "store.png") + '"</a>\n                                <p>' + this.place.name + ' - ' + this.place.location.address + '</p></div>';
-                infoWindow.setContent(html);
-                infoWindow.open(map, this);
-            });
-        });
-
-        //then zoom to fit markers
-        map.setCenter(bounds.getCenter());
-        map.fitBounds(bounds);
-    });
-}
-
-function makeMap(mapDiv) {
-    if (!mapDiv) {
-        return;
-    }
-
-    //make our map
-    var map = new google.maps.Map(mapDiv, mapOptions);
-    loadPlaces(map);
-
-    var input = (0, _bling.$)('[name="geolocate"]');
-    var autocomplete = new google.maps.places.Autocomplete(input);
-
-    autocomplete.addListener('place_changed', function () {
-        var place = autocomplete.getPlace();
-        loadPlaces(map, place.geometry.location.lat(), place.geometry.location.lng());
-    });
-}
-
-module.exports = { makeMap: makeMap };
+var heartForms = (0, _bling.$$)('form.heart');
+heartForms.on('submit', _heart2.default);
 
 /***/ })
 /******/ ]);

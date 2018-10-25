@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Store = mongoose.model('Store');
+const User = mongoose.model('User');
 const multer = require('multer');
 const jimp = require('jimp');
 const uuid = require('uuid');
@@ -89,7 +90,7 @@ exports.updateStore = async (req, res) => {
 
 exports.getStoreBySlug = async (req, res, next) => {
     const slug = req.params.slug;
-    const store = await Store.findOne({slug}).populate('author');
+    const store = await Store.findOne({slug}).populate('author reviews');
     if (!store) return next();
     res.render('store', {store, title: store.name})
 };
@@ -140,4 +141,23 @@ exports.mapStores = async (req, res) => {
 
 exports.mapPage = (req, res) => {
     res.render('map', {title: 'Map'})
+};
+
+exports.heartStore = async (req, res) => {
+    const hearts = req.user.hearts.map(obj => obj.toString() );
+    const operator = hearts.includes(req.params.id) ? '$pull' : '$addToSet';
+    const user = await User
+        .findByIdAndUpdate(req.user._id,
+            {[operator]: {hearts: req.params.id }},
+            {new: true}
+        );
+
+    res.json(user);
+};
+
+exports.getHearts = async (req, res) => {
+    const stores = await Store.find({
+        _id: {$in: req.user.hearts}
+    });
+    res.render('stores', { title: 'Hearted Stores', stores })
 };
